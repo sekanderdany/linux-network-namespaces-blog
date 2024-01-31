@@ -11,7 +11,7 @@ In the world of Linux networking, creating isolated network environments can be 
 
 ## Creating the Network Namespaces
 
-First, we need to create our namespaces. We'll call these namespaces "red" and "blue." This is done using the ip netns command.
+First, we need to create our namespaces. We'll call these namespaces `red` and `blue`. This is done using the ip netns command.
 
 ```bash
 ip netns add red
@@ -28,7 +28,7 @@ ip netns list
 
 ## Creating a Virtual Ethernet (veth) Pair
 
-A veth pair is like a virtual Ethernet cable. One end will be in the "red" namespace, and the other in the "blue" namespace.
+A veth pair is like a virtual Ethernet cable. One end will be in the `red` namespace, and the other in the `blue` namespace.
 
 ```bash
 ip link add veth-red type veth peer name veth-blue
@@ -44,16 +44,16 @@ ip link set veth-blue netns blue
 ```
 ## Configuring Network Interfaces and IP Addresses
 
-For the "red" and "blue" namespaces to communicate, we need to configure their network interfaces and assign IP addresses.
+For the `red` and `blue` namespaces to communicate, we need to configure their network interfaces and assign IP addresses.
 
-### Inside the "Red" Namespace:
+### Inside the `Red` Namespace:
 ```bash
 ip netns exec red ip link set lo up
 ip netns exec red ip link set veth-red up
 ip netns exec red ip addr add 192.168.15.1/32 dev veth-red
 ```
 
-### Inside the "Blue" Namespace:
+### Inside the `Blue` Namespace:
 ```bash
 ip netns exec blue ip link set lo up
 ip netns exec blue ip link set veth-blue up
